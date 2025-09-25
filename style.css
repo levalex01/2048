@@ -9,7 +9,14 @@
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* empêche le scroll */
+  touch-action: none; /* désactive le swipe/zoom par défaut */
+}
+
 body{
   margin:0;
   background:linear-gradient(180deg,#f8f6f1, #f3efe6);
@@ -165,3 +172,29 @@ body{
   .cell{font-size:20px}
   .tile{font-size:14px}
 }
+
+.tile {
+  transition: transform 0.15s ease-in-out, background-color 0.15s;
+  will-change: transform;
+}
+
+.tile.new {
+  animation: pop 0.2s ease-out;
+}
+
+.tile.merge {
+  animation: merge 0.25s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(0); }
+  80% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes merge {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
