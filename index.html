@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>2048 — PWA</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#f7d77a"/>
+</head>
+<body>
+  <main class="game-container">
+    <header class="game-header">
+      <div>
+        <h1 id="title">2048</h1>
+        <p class="subtitle" id="subtitle">Glisse ou utilise les flèches</p>
+      </div>
+      <div class="score-panel">
+        <div class="score">Score<br><span id="score">0</span><span id="score-plus" class="score-plus"></span></div>
+        <div class="best">Best<br><span id="best">0</span></div>
+        <div class="controls">
+          <button id="undoBtn" class="btn small">Undo</button>
+          <button id="newGameBtn" class="btn small">Nouvelle partie</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="game-area">
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <footer class="game-footer">
+      <div class="footer-row">
+        <div>
+          <label for="lang">Lang:</label>
+          <select id="lang">
+            <option value="fr">FR</option>
+            <option value="en">EN</option>
+          </select>
+        </div>
+        <div class="save-load">
+          <button id="exportBtn" class="btn tiny">Exporter</button>
+          <button id="importBtn" class="btn tiny">Importer</button>
+          <input id="importFile" type="file" accept="application/json" style="display:none"/>
+        </div>
+      </div>
+      <p id="instructions">Glissez (mobile) ou utilisez ← ↑ → ↓ pour jouer. PWA prête — ajouter à l'écran d'accueil.</p>
+    </footer>
+  </main>
+
+  <script src="app.js" defer></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(console.error);
+    }
+  </script>
+</body>
+</html>

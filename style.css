@@ -1,0 +1,167 @@
+:root{
+  --bg: #f6f5f0;
+  --grid-bg: #bbada0;
+  --cell-empty: rgba(238,228,218,0.35);
+  --tile-text-dark: #776e65;
+  --tile-text-light: #f9f6f2;
+  --accent: #f7d77a;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:linear-gradient(180deg,#f8f6f1, #f3efe6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  color:#333;
+}
+
+.game-container{
+  width:100%;
+  max-width:520px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  border-radius:12px;
+  padding:18px;
+  background:rgba(255,255,255,0.6);
+  backdrop-filter: blur(4px);
+}
+
+.game-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:16px;
+}
+.game-header h1{
+  margin:0;
+  font-size:40px;
+  letter-spacing:1px;
+}
+.subtitle{margin:0;font-size:12px;color:#666}
+
+.score-panel{
+  text-align:right;
+}
+.score-panel .score, .score-panel .best{
+  background:#fff6;
+  padding:6px 10px;
+  border-radius:8px;
+  margin-bottom:6px;
+  font-size:12px;
+  display:inline-block;
+  min-width:92px;
+}
+.score-panel span{font-weight:800;font-size:20px;display:block}
+
+.controls{margin-top:6px;}
+.btn{
+  background:var(--accent);
+  border:none;
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:700;
+  margin-left:6px;
+}
+.btn.small{padding:6px 8px;font-size:13px}
+.btn.tiny{padding:5px 6px;font-size:12px}
+
+.game-area{
+  background:transparent;
+  padding:10px;
+  border-radius:8px;
+}
+.grid{
+  position:relative;
+  width:100%;
+  padding:14px;
+  background:var(--grid-bg);
+  border-radius:12px;
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap:12px;
+  aspect-ratio:1/1;
+}
+.cell {
+  background: var(--cell-empty);
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  font-size:24px;
+  color:var(--tile-text-dark);
+  min-height:0;
+}
+
+/* tile styles */
+.tile {
+  position:absolute;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  transition: transform 180ms cubic-bezier(.2,.8,.2,1), top 120ms ease, left 120ms ease, opacity 120ms ease;
+  will-change: transform, top, left;
+  text-align:center;
+  padding:8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  transform-origin: center;
+}
+.tile .value{display:block; font-size:20px;}
+
+/* pop animation */
+.tile.pop {
+  animation: pop 200ms ease;
+}
+@keyframes pop{
+  0%{ transform: scale(0.3); opacity:0 }
+  60%{ transform: scale(1.08); opacity:1 }
+  100%{ transform: scale(1); }
+}
+
+/* merge flash */
+.tile.merge {
+  box-shadow: 0 8px 28px rgba(0,0,0,0.22), 0 0 0 6px rgba(255,255,255,0.06) inset;
+  transform: scale(1.06);
+}
+
+/* score increment */
+.score-plus{
+  display:inline-block;
+  margin-left:6px;
+  color:#2d8a4f;
+  font-size:12px;
+  opacity:0;
+  transition: transform 400ms ease, opacity 400ms ease;
+  transform: translateY(-6px);
+}
+.score-plus.show{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* colors per value (common ones) */
+.tile-2 { background:#eee4da; color:var(--tile-text-dark); }
+.tile-4 { background:#ede0c8; color:var(--tile-text-dark); }
+.tile-8 { background:#f2b179; color:var(--tile-text-light); font-size:20px;}
+.tile-16 { background:#f59563; color:var(--tile-text-light); font-size:20px;}
+.tile-32 { background:#f67c5f; color:var(--tile-text-light);}
+.tile-64 { background:#f65e3b; color:var(--tile-text-light);}
+.tile-128 { background:#edcf72; color:var(--tile-text-light); font-size:16px;}
+.tile-256 { background:#edcc61; color:var(--tile-text-light); font-size:16px;}
+.tile-512 { background:#edc850; color:var(--tile-text-light); font-size:16px;}
+.tile-1024 { background:#edc53f; color:var(--tile-text-light); font-size:14px;}
+.tile-2048 { background:#edc22e; color:var(--tile-text-light); font-size:14px;}
+
+/* responsive tweaks */
+@media (max-width:420px){
+  .game-header h1{font-size:28px}
+  .cell{font-size:20px}
+  .tile{font-size:14px}
+}

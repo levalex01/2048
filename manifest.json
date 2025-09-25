@@ -1,0 +1,15 @@
+{
+  "name": "2048 - PWA",
+  "short_name": "2048",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f6f5f0",
+  "theme_color": "#f7d77a",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
